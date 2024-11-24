@@ -7,7 +7,11 @@ import 'react-native-reanimated';
 
 export default function RootLayout() {
   const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    InterRegular: require('../assets/fonts/Inter_24pt-Regular.ttf'),
+    InterBold: require('../assets/fonts/Inter_28pt-Bold.ttf'),
+    InterLight: require('../assets/fonts/Inter_18pt-Light.ttf'),
+    InterMedium: require('../assets/fonts/Inter_18pt-Medium.ttf'),
+    InterSemiBold: require('../assets/fonts/Inter_18pt-SemiBold.ttf'),
   });
 
   useEffect(() => {
@@ -24,6 +28,7 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="/" />
         <Stack.Screen name="/signup" />
+        <Stack.Screen name="/user" />
         <Stack.Screen name="+not-found" />
       </Stack>
   );
