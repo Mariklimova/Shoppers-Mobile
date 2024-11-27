@@ -36,7 +36,7 @@ export default function signup() {
                         <TextInput style={styles.inp} secureTextEntry={true} onChangeText={(value) => changeUser(value, 'password')}></TextInput>
                     </View>
 
-                    <TouchableOpacity style={styles.btn} onPress={() => console.log(user)}><Link href={'/user'}><Text style={styles.titleSign}>SIGN IN</Text></Link></TouchableOpacity>
+                    <TouchableOpacity style={styles.btn} onPress={() => console.log(user)}><Link href={'/login'}><Text style={styles.titleSign}>SIGN UP</Text></Link></TouchableOpacity>
 
                 </View>
 

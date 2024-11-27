@@ -26,7 +26,7 @@ export default function login() {
                         <Text style={{ fontFamily: 'InterBold', fontSize: 14, color: '#000000' }}>Password</Text>
                         <TextInput style={styles.inp} secureTextEntry={true} onChangeText={(value) => changeUser(value, 'password')}></TextInput>
                     </View>
-                    <TouchableOpacity style={styles.btn} onPress={() => console.log(user)}><Text style={styles.titleSign}>SIGN IN</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.btn} onPress={() => console.log(user)}><Link href={'/user'}><Text style={styles.titleSign}>SIGN IN</Text></Link></TouchableOpacity>
                 </View>
 
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5, justifyContent: 'center' }}>
