@@ -1,4 +1,4 @@
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
@@ -7,9 +7,21 @@ export default function login() {
         username: '',
         password: '',
     });
-
+    const router = useRouter();
     const changeUser = (value: string, tag: string) => setUser({ ...user, [tag]: value })
 
+    const goToproductsMenu = () => {
+        try {
+            if (!user.username || !user.password) throw new Error('пустое значение')
+            if (user.password.length < 8) throw new Error('пароль не менее 8 символов')
+            // axios
+
+            router.replace('/products');
+
+        } catch (err: any) {
+            console.error(err.message)
+        }
+    }
     return (
         <>
             <View style={{ alignItems: 'center', gap: 67, backgroundColor: 'white', flex: 1 }}>
@@ -18,15 +30,18 @@ export default function login() {
                     <Text style={{ fontFamily: 'InterRegular', fontSize: 12, color: '#606060' }}>Login with Username & password</Text>
                 </View>
                 <View style={styles.wrapperInp}>
-                    <View style={{ gap: 12 }}>
+
+                    <View style={{ gap: 12, width: '100%' }}>
                         <Text style={{ fontFamily: 'InterBold', fontSize: 14, color: '#000000' }}>Username</Text>
                         <TextInput style={styles.inp} onChangeText={(value) => changeUser(value, 'username')}></TextInput>
                     </View>
-                    <View style={{ gap: 12 }}>
+
+                    <View style={{ gap: 12, width: '100%' }}>
                         <Text style={{ fontFamily: 'InterBold', fontSize: 14, color: '#000000' }}>Password</Text>
                         <TextInput style={styles.inp} secureTextEntry={true} onChangeText={(value) => changeUser(value, 'password')}></TextInput>
                     </View>
-                    <TouchableOpacity style={styles.btn} onPress={() => console.log(user)}><Link href={'/user'}><Text style={styles.titleSign}>SIGN IN</Text></Link></TouchableOpacity>
+                    
+                    <TouchableOpacity style={styles.btn} onPress={goToproductsMenu}><Text style={styles.titleSign}>SIGN IN</Text></TouchableOpacity>
                 </View>
 
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5, justifyContent: 'center' }}>
@@ -54,7 +69,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         borderColor: '#CECECE',
         borderWidth: 2,
-        paddingHorizontal: 100,
+        paddingHorizontal: 15,
         paddingVertical: 10,
     },
     btn: {

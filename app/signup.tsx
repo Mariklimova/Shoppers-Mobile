@@ -21,18 +21,18 @@ export default function signup() {
                 </View>
 
                 <View style={styles.wrapperInp}>
-                    <View style={{ gap: 12 }}>
-                        <Text style={{ fontFamily: 'InterBold',fontSize: 14,color: '#000000'}}>Name</Text>
+                    <View style={{ gap: 12, width: '100%' }}>
+                        <Text style={{ fontFamily: 'InterBold', fontSize: 14, color: '#000000' }}>Name</Text>
                         <TextInput style={styles.inp} onChangeText={(value) => changeUser(value, 'name')}></TextInput>
                     </View>
 
-                    <View style={{ gap: 12 }}>
-                        <Text style={{ fontFamily: 'InterBold',fontSize: 14,color: '#000000'}}>Email</Text>
+                    <View style={{ gap: 12, width: '100%' }}>
+                        <Text style={{ fontFamily: 'InterBold', fontSize: 14, color: '#000000' }}>Email</Text>
                         <TextInput style={styles.inp} onChangeText={(value) => changeUser(value, 'email')}></TextInput>
                     </View>
 
-                    <View style={{ gap: 12 }}>
-                        <Text style={{ fontFamily: 'InterBold',fontSize: 14,color: '#000000'}}>Password</Text>
+                    <View style={{ gap: 12, width: '100%' }}>
+                        <Text style={{ fontFamily: 'InterBold', fontSize: 14, color: '#000000' }}>Password</Text>
                         <TextInput style={styles.inp} secureTextEntry={true} onChangeText={(value) => changeUser(value, 'password')}></TextInput>
                     </View>
 
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         borderColor: '#CECECE',
         borderWidth: 2,
-        paddingHorizontal: 100,
+        paddingHorizontal: 15,
         paddingVertical: 10,
     },
     btn: {

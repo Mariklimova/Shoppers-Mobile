@@ -30,6 +30,7 @@ export default function RootLayout() {
         <Stack.Screen name="/signup" />
         <Stack.Screen name="/user" />
         <Stack.Screen name="+not-found" />
+        <Stack.Screen name="/(tabs)" />
       </Stack>
   );
 }
