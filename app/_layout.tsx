@@ -25,7 +25,7 @@ export default function RootLayout() {
   }
 
   return (
-      <Stack>
+      <Stack screenOptions={{headerShown:false}}>
         <Stack.Screen name="/" />
         <Stack.Screen name="/signup" />
         <Stack.Screen name="/user" />
