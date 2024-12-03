@@ -9,20 +9,22 @@ import { useRouter } from 'expo-router';
 
 export default function Products() {
     const router = useRouter()
-    const container = storage.map((el: iProduct) => <View style={styles.item} key={el.id}>
-        <Product />
-        <Text>{el?.title}</Text>
-        <Text>{el?.price}</Text>
-    </View>)
+    const container = storage.map((el: iProduct) => <TouchableOpacity key={el.id} onPress={() => router.replace(`/detail/${el.id}`)}>
+        <View style={styles.item} >
+            <Product width={'100%'} height={112} />
+            <Text>{el?.title}</Text>
+            <Text>{el?.price}</Text>
+        </View>
+    </TouchableOpacity>
+    )
 
-    return <View style={{ gap: 62, backgroundColor: 'white', flex: 1 }}>
+    return <View style={{ gap: 62, flex: 1 }}>
 
         <Header />
         <View style={{ flexDirection: 'row', gap: 20, justifyContent: 'center', flexWrap: 'wrap' }}>
             {container}
         </View>
 
-        <TouchableOpacity style={{ marginLeft: '10%' }} onPress={() => router.back()}><ImgBack /></TouchableOpacity>
     </View>
 }
 

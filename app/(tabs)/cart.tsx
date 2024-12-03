@@ -4,24 +4,26 @@ import Header from '@/components/header'
 import { useRouter } from 'expo-router'
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import arrBasket from '../storage/basket'
+import { iProduct } from '@/interfaces'
 
 function Products() {
 	const router = useRouter()
 
-	const obj = [
-		{
-			id: 1,
-			title: 'Adidas Shoe',
-			price: 20000,
-			Qty: 1,
-		},
-		{
-			id: 2,
-			title: 'Adidas Shoe',
-			price: 20000,
-			Qty: 1,
-		},
-	]
+	// const obj = [
+	// 	{
+	// 		id: 1,
+	// 		title: 'Adidas Shoe',
+	// 		price: 20000,
+	// 		Qty: 1,
+	// 	},
+	// 	{
+	// 		id: 2,
+	// 		title: 'Adidas Shoe',
+	// 		price: 20000,
+	// 		Qty: 1,
+	// 	},
+	// ]
 
 	return (
 		<View style={{ flex: 1, alignItems: 'center', gap: 62 }}>
@@ -29,12 +31,12 @@ function Products() {
 
 			<View style={{ width: '80%', gap: 62 }}>
 				<View style={{ gap: 40, flexWrap: 'wrap', justifyContent: 'center' }}>
-					{obj.map(el => (
+					{arrBasket.map((el:iProduct) => (
 						<View key={el.id} style={styles.item}>
 							<Product />
 							<View style={{ gap: 13 }}>
 								<Text style={styles.text}>{el?.title}</Text>
-								<Text style={styles.textSmall}>Qty: {el.Qty}</Text>
+								<Text style={styles.textSmall}>Qty:1</Text>
 								<Text style={styles.text}>Rs. {el?.price}</Text>
 							</View>
 						</View>
@@ -52,11 +54,8 @@ function Products() {
 				</View>
 
 				<TouchableOpacity style={styles.btn}>
-					{' '}
+					{/* {' '} */}
 					<Text style={styles.titleSing}>CHECKOUT</Text>{' '}
-				</TouchableOpacity>
-				<TouchableOpacity onPress={() => router.back()}>
-					<ImgBack />
 				</TouchableOpacity>
 			</View>
 		</View>
