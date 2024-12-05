@@ -2,13 +2,15 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import storage from '../storage/index'
 import { iProduct } from '@/interfaces'
 import Product from '@/assets/images/Product'
+import Product2 from '@/assets/images/SmartWatch'
+import Product3 from '@/assets/images/AdidasShoe'
 import Header from '@/components/header';
-import ImgBack from '@/assets/images/ImgBack';
 import { useRouter } from 'expo-router';
 
 
 export default function Products() {
     const router = useRouter()
+
     const container = storage.map((el: iProduct) => <TouchableOpacity key={el.id} onPress={() => router.replace(`/detail/${el.id}`)}>
         <View style={styles.item} >
             <Product width={'100%'} height={112} />

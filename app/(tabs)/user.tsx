@@ -1,6 +1,5 @@
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import ImgBack from '@/assets/images/ImgBack'
 import Header from '@/components/header'
 
 export default function user() {
@@ -13,14 +12,7 @@ const router = useRouter()
             <Text style={{ fontFamily: 'InterBold', fontSize: 32, marginTop: 214 }}>Hello SIlva</Text>
           
            <TouchableOpacity style={styles.btn} onPress={() => router.replace('/')}> <Text style={styles.titleSign}>SIGN OUT</Text></TouchableOpacity >
-       
-           <TouchableOpacity
-				style={{ marginLeft: '5%' }}
-				onPress={() => router.back()}
-			>
-				<ImgBack />
-			</TouchableOpacity>
-       
+              
         </View>
 
     </>

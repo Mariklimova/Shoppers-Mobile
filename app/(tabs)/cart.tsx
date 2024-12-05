@@ -54,7 +54,6 @@ function Products() {
 				</View>
 
 				<TouchableOpacity style={styles.btn}>
-					{/* {' '} */}
 					<Text style={styles.titleSing}>CHECKOUT</Text>{' '}
 				</TouchableOpacity>
 			</View>
