@@ -2,7 +2,7 @@ import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
-export default function login() {
+export default function Login() {
     const [user, setUser] = useState({
         username: '',
         password: '',
@@ -10,7 +10,7 @@ export default function login() {
     const router = useRouter();
     const changeUser = (value: string, tag: string) => setUser({ ...user, [tag]: value })
 
-    const goToproductsMenu = () => {
+    const goToProductsMenu = () => {
         try {
             if (!user.username || !user.password) throw new Error('пустое значение')
             if (user.password.length < 8) throw new Error('пароль не менее 8 символов')
@@ -41,7 +41,7 @@ export default function login() {
                         <TextInput style={styles.inp} secureTextEntry={true} onChangeText={(value) => changeUser(value, 'password')}></TextInput>
                     </View>
                     
-                    <TouchableOpacity style={styles.btn} onPress={goToproductsMenu}><Text style={styles.titleSign}>SIGN IN</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.btn} onPress={goToProductsMenu}><Text style={styles.titleSign}>SIGN IN</Text></TouchableOpacity>
                 </View>
 
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5, justifyContent: 'center' }}>

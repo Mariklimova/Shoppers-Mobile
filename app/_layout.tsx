@@ -1,7 +1,7 @@
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
+import { useEffect,useCallback } from 'react';
 import 'react-native-reanimated';
 
 
@@ -14,11 +14,16 @@ export default function RootLayout() {
     InterSemiBold: require('../assets/fonts/Inter_18pt-SemiBold.ttf'),
   });
 
-  useEffect(() => {
+  const hideSplashScreen = useCallback(async () => {
     if (loaded) {
-      SplashScreen.hideAsync();
+      await SplashScreen.hideAsync();
     }
   }, [loaded]);
+
+  useEffect(() => {
+    hideSplashScreen();
+  }, [hideSplashScreen]);
+
 
   if (!loaded) {
     return null;
@@ -26,13 +31,12 @@ export default function RootLayout() {
 
   return (
       <Stack screenOptions={{headerShown:false}}>
-        <Stack.Screen name="/" />
-        <Stack.Screen name="/signup" />
-        <Stack.Screen name="/detail" />
-       
-        <Stack.Screen name="/user" />
+        <Stack.Screen name="index" />
+        <Stack.Screen name="login" />
+        <Stack.Screen name="signup" />
+        <Stack.Screen name="detail/[id]" />
         <Stack.Screen name="+not-found" />
-        <Stack.Screen name="/(tabs)" />
+        <Stack.Screen name="(tabs)" />
       </Stack>
   );
 }

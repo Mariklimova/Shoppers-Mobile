@@ -1,14 +1,26 @@
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function signup() {
+
+    const inputElems = [
+        { label: 'Name', value: 'name', isSecure: false },
+        { label: 'Username', value: 'email', isSecure: false },
+        { label: 'Password', value: 'password', isSecure: true },
+    ]
+
+    const router = useRouter();
     const [user, setUser] = useState({
         name: '',
         email: '',
         password: '',
     });
 
+    const signUp = ()=>{
+        console.log(user);
+        router.replace('/login')
+    }
     const changeUser = (value: string, tag: string) => setUser({ ...user, [tag]: value })
 
     return (
@@ -21,22 +33,15 @@ export default function signup() {
                 </View>
 
                 <View style={styles.wrapperInp}>
-                    <View style={{ gap: 12, width: '100%' }}>
-                        <Text style={{ fontFamily: 'InterBold', fontSize: 14, color: '#000000' }}>Name</Text>
-                        <TextInput style={styles.inp} onChangeText={(value) => changeUser(value, 'name')}></TextInput>
-                    </View>
 
-                    <View style={{ gap: 12, width: '100%' }}>
-                        <Text style={{ fontFamily: 'InterBold', fontSize: 14, color: '#000000' }}>Email</Text>
-                        <TextInput style={styles.inp} onChangeText={(value) => changeUser(value, 'email')}></TextInput>
-                    </View>
+                    {inputElems.map((elem, index) => (
+                        <View key ={index} style={{ gap: 12, width: '100%' }}>
+                            <Text style={{ fontFamily: 'InterBold', fontSize: 14, color: '#000000' }}>{elem.label}</Text>
+                            <TextInput style={styles.inp} secureTextEntry={elem.isSecure} onChangeText={(value) => changeUser(value, elem.value)}></TextInput>
+                        </View>
+                    ))}
 
-                    <View style={{ gap: 12, width: '100%' }}>
-                        <Text style={{ fontFamily: 'InterBold', fontSize: 14, color: '#000000' }}>Password</Text>
-                        <TextInput style={styles.inp} secureTextEntry={true} onChangeText={(value) => changeUser(value, 'password')}></TextInput>
-                    </View>
-
-                    <TouchableOpacity style={styles.btn} onPress={() => console.log(user)}><Link href={'/login'}><Text style={styles.titleSign}>SIGN UP</Text></Link></TouchableOpacity>
+                    <TouchableOpacity style={styles.btn} onPress={signUp}><Text style={styles.titleSign}>SIGN UP</Text></TouchableOpacity>
 
                 </View>
 

@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import ImgPrew from '../assets/images/prewiu'
+import ImgPrew from '../assets/images/prewiu';
 import { useRouter } from "expo-router";
 
 export default function index() {
@@ -19,11 +19,9 @@ export default function index() {
 
 const styles = StyleSheet.create({
     titlePrew: {
-        alignItems: 'center',
         textAlign: 'center',
         width: '50%',
-        fontFamily: 'Inter',
+        fontFamily: 'InterSemiBold',
         fontSize: 36,
-        fontWeight: 600,
     }
 })
