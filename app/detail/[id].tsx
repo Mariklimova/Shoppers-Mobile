@@ -5,7 +5,7 @@ import Product from "@/assets/images/ProdItem";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import storage from '../../storage/index'
-import arrBasket from "../../storage/basket";
+// import arrBasket from "../../storage/basket";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -13,28 +13,28 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function Detail() {
 
     const params: any = useLocalSearchParams()
-	const router = useRouter()
-	const [product, setProduct] = useState<any>([])
+    const router = useRouter()
+    const [product, setProduct] = useState<any>([])
 
-	useEffect(() => {
-		const filterStorage = storage.filter(el => el.id == params.id)
-		setProduct(filterStorage)
-	}, [params.id])
+    useEffect(() => {
+        const filterStorage = storage.filter(el => el.id == params.id)
+        setProduct(filterStorage)
+    }, [params.id])
 
-	const addToBasket = async () => {
-		try {
-			const gettingData: any = await AsyncStorage.getItem('prod')
-			const products = JSON.parse(gettingData)||[]
+    const addToBasket = async () => {
+        try {
+            const gettingData: any = await AsyncStorage.getItem('prod')
+            const products = JSON.parse(gettingData) || []
 
-			products.push(product[0])
-			await AsyncStorage.setItem('prod', JSON.stringify(products))
-			console.log('success')
-			router.replace('/(tabs)/cart')
-		} catch (error: any) {
-			console.error(error.message)
-		}
-        
-	}
+            products.push(product[0])
+            await AsyncStorage.setItem('prod', JSON.stringify(products))
+            console.log('success')
+            router.replace('/(tabs)/cart')
+        } catch (error: any) {
+            console.error(error.message)
+        }
+
+    }
     return <>
         <View style={{ flex: 1, marginHorizontal: 30, alignItems: 'center' }}>
             <View >
@@ -47,29 +47,29 @@ export default function Detail() {
 
             </View>
             <View style={{ gap: 14, marginBottom: 38, width: '90%', alignSelf: 'center' }}>
-                <Text style={styles.text}>{product[0]?.title}</Text>
-                <Text style={styles.text}>Rs. {product[0]?.price}</Text>
+                <Text style={{ fontFamily: 'InterSemiBold', fontSize: 20, }}>{product[0]?.title}</Text>
+                <Text style={{ fontFamily: 'InterSemiBold', fontSize: 20, }}>Rs. {product[0]?.price}</Text>
             </View>
-            <TouchableOpacity style={styles.btn} onPress={addToBasket}><Text style={styles.titleSign}>Add to Cart</Text></TouchableOpacity>
 
-            <Text style={styles.title_description}>More Details</Text>
-            <Text style={styles.description}>Gear up with the latest collections from
-                adidas Originals, Running, Football, Training.
-                With over 20,000+ products, you will never
-                run out of choice. Grab your favorites now.
-                Secure Payments. 100% Original Products.
-                Gear up with adidas.
-            </Text>
-        </View>
+            <TouchableOpacity style={styles.btn} onPress={addToBasket}>
+                <Text style={{ fontFamily: 'InterBold', fontSize: 14, color: '#4D1717', }}>Add to Cart</Text>
+            </TouchableOpacity>
+
+            <View style={{ gap: 16 }}>
+                <Text style={{ fontFamily: 'InterBold', fontSize: 14, }}>More Details</Text>
+                <Text style={styles.description} > Gear up with the latest collections from
+                    adidas Originals, Running, Football, Training.
+                    With over 20,000+ products, you will never
+                    run out of choice. Grab your favorites now.
+                    Secure Payments. 100% Original Products.
+                    Gear up with adidas.
+                </Text>
+            </View>
+        </View >
     </>
 }
 
 const styles = StyleSheet.create({
-    text: {
-        fontFamily: 'Inter',
-        fontSize: 20,
-        fontWeight: 600,
-    },
     btn: {
         marginTop: 68,
         marginBottom: 42,
@@ -81,24 +81,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '90%',
     },
-    titleSign: {
-        fontFamily: 'Inter',
-        fontSize: 14,
-        fontWeight: 700,
-        color: '#4D1717',
-
-    },
-    title_description: {
-        fontFamily: 'Inter',
-        fontSize: 14,
-        fontWeight: 700,
-
-    },
     description: {
-        fontFamily: 'Inter',
+        fontFamily: 'InterLight',
         fontSize: 14,
-        fontWeight: 300,
         color: '#AAA8A8',
-
+        paddingHorizontal: 12,
     }
 })

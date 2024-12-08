@@ -12,12 +12,17 @@ import Del from '@/assets/images/delete'
 function Products() {
 	const router = useRouter()
 	const [basket, setBasket] = useState<iProduct[]>([]);
-	// const [total, setTotal] = useState(0);
 
 	const loadBasket = async () => {
 		const exitingProducts = await AsyncStorage.getItem('prod')
 		const parsed = exitingProducts && JSON.parse(exitingProducts) || []
 		setBasket(parsed)
+	}
+
+	const removeFromBasket = async (index: number) => {
+		const updatedBasket = basket.filter((_, i) => i !== index);
+		setBasket(updatedBasket);
+		await AsyncStorage.setItem('prod', JSON.stringify(updatedBasket));
 	}
 
 	useEffect(() => {
@@ -33,12 +38,14 @@ function Products() {
 					{basket.map((el: iProduct, index) => (
 						<View key={index} style={styles.item}>
 							<Product />
-							<View style={{ gap: 13 }}>
+							<View style={{ gap: 13}}>
 								<Text style={styles.text}>{el?.title}</Text>
 								<Text style={styles.textSmall}>Qty:{el?.Qty}</Text>
 								<Text style={styles.text}>Rs. {el?.price}</Text>
 							</View>
-							<Del/>
+							<TouchableOpacity onPress={() => removeFromBasket(index)}>
+								<Del />
+							</TouchableOpacity>
 						</View>
 					))}
 				</View>
@@ -49,8 +56,8 @@ function Products() {
 						style={{ flexDirection: 'row', justifyContent: 'space-between' }}
 					>
 						<Text style={styles.textTotal}>Total :</Text>
-						<Text style={styles.textSmall}>Rs.{basket.reduce((sum, el: any) => sum + el.Qty, 0)}</Text>
-						<Text style={styles.textTotal}>Rs.{basket.reduce((sum, el: any) => sum + el.price, 0)}</Text>
+						<Text style={styles.textSmall}>Qty. {basket.reduce((sum, el: any) => sum + el.Qty, 0)}</Text>
+						<Text style={styles.textTotal}>Rs. {basket.reduce((sum, el: any) => sum + el.price, 0)}</Text>
 					</View>
 				</View>
 
