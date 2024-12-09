@@ -1,6 +1,5 @@
 import Product from '@/assets/images/Product'
 import Header from '@/components/header'
-import { useRouter } from 'expo-router'
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import arrBasket from '../../storage/basket'
@@ -10,7 +9,6 @@ import Del from '@/assets/images/delete'
 
 
 function Products() {
-	const router = useRouter()
 	const [basket, setBasket] = useState<iProduct[]>([]);
 
 	const loadBasket = async () => {

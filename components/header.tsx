@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 export default function Header() {
     return (<>
-        <View style={styles.wrapper}><Text style={{ fontFamily: 'Inter', fontSize: 32, fontWeight: 700, textAlign: 'center' }}>SHOPPERS</Text></View>
+        <View style={styles.wrapper}><Text style={{ fontFamily: 'InterBold', fontSize: 32, textAlign: 'center' }}>SHOPPERS</Text></View>
     </>);
 }
 const styles = StyleSheet.create({

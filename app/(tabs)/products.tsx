@@ -11,13 +11,14 @@ import { useRouter } from 'expo-router';
 export default function Products() {
     const router = useRouter()
 
-    const container = storage.map((el: iProduct) => <TouchableOpacity key={el.id} onPress={() => router.replace(`/detail/${el.id}`)}>
-        <View style={styles.item} >
-            <Product width={'100%'} height={112} />
-            <Text>{el?.title}</Text>
-            <Text>{el?.price}</Text>
-        </View>
-    </TouchableOpacity>
+    const container = storage.map((el: iProduct) =>
+        <TouchableOpacity key={el.id} onPress={() => router.replace(`/detail/${el.id}`)}>
+            <View style={styles.item} >
+                <Product width={'100%'} height={112} />
+                <Text>{el?.title}</Text>
+                <Text>{el?.price}</Text>
+            </View>
+        </TouchableOpacity>
     )
 
     return <View style={{ gap: 62, flex: 1 }}>
