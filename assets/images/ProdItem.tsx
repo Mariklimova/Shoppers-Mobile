@@ -3,7 +3,7 @@ import Svg, { Path, Defs, Pattern, Use, Image } from "react-native-svg"
 function SvgComponent(props:any) {
   return (
     <Svg
-      width={props.with}
+      width={props.width}
       height={props.height}
       viewBox="0 0 390 392"
       fill="none"
