@@ -1,8 +1,7 @@
 import Product from '@/assets/images/Product'
 import Header from '@/components/header'
 import React, { useEffect, useState } from 'react'
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import arrBasket from '../../storage/basket'
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { iProduct } from '@/interfaces'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Del from '@/assets/images/delete'
@@ -18,7 +17,7 @@ function Products() {
 		const result = [];
 		for (let i = 0; i < storage.length; i++) {
 			for (let a = 0; a < parsed.length; a++) {
-				if (storage[i].id == parsed[a].id){
+				if (storage[i].id == parsed[a].id) {
 					result.push(storage[i])
 				}
 			}
@@ -30,7 +29,13 @@ function Products() {
 	const removeFromBasket = async (index: number) => {
 		const updatedBasket = basket.filter((_, i) => i !== index);
 		setBasket(updatedBasket);
-		await AsyncStorage.setItem('prod', JSON.stringify(updatedBasket));
+		
+		// Проверка на циклические ссылки
+		try {
+			await AsyncStorage.setItem('prod', JSON.stringify(updatedBasket));
+		} catch (error) {
+			console.error("Ошибка при сохранении в AsyncStorage:", error);
+		}
 	}
 
 	useEffect(() => {
@@ -48,7 +53,9 @@ function Products() {
 					{basket.map((el: iProduct, index) => (
 						<View key={index} style={styles.item}>
 							{/* <Product /> */}
-							{el?.img}
+							<View style={{ width: 136, height: 117 }}>
+								{el?.img}
+							</View>
 							<View style={{ gap: 13 }}>
 								<Text style={styles.text}>{el?.title}</Text>
 								<Text style={styles.textSmall}>Qty:{el?.Qty}</Text>
@@ -73,7 +80,7 @@ function Products() {
 				</View>
 
 				<TouchableOpacity style={styles.btn}>
-					<Text style={styles.titleSing}>CHECKOUT</Text>{' '}
+					<Text style={styles.titleSing}>CHECKOUT</Text>
 				</TouchableOpacity>
 			</ScrollView>
 		</View>

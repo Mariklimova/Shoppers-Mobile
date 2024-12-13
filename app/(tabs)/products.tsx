@@ -14,10 +14,9 @@ export default function Products() {
     const container = storage.map((el: iProduct) =>
         <TouchableOpacity key={el.id} onPress={() => router.replace(`/detail/${el.id}`)}>
             <View style={styles.item} >
-                {/* <Product width={'100%'} height={112} /> */}
                 {el?.img}
-                <Text style={{textAlign:'center',marginTop:10}}>{el?.title}</Text>
-                <Text style={{textAlign:'center'}}>{el?.price}</Text>
+                <Text style={{ textAlign: 'center', marginTop: 10 }}>{el?.title}</Text>
+                <Text style={{ textAlign: 'center' }}>{el?.price}</Text>
             </View>
         </TouchableOpacity>
     )
@@ -35,7 +34,7 @@ export default function Products() {
 const styles = StyleSheet.create({
     item: {
         // padding: 15,
-        width:134,
+        width: 134,
         height: 180,
         borderRadius: 30,
         shadowColor: '#000',

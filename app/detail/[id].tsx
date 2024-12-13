@@ -4,8 +4,7 @@ import ImgBack from "@/assets/images/ImgBack";
 import Product from "@/assets/images/ProdItem";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import storage from '../../storage/index'
-// import arrBasket from "../../storage/basket";
+import storage from '../../storage/index';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -38,8 +37,9 @@ export default function Detail() {
     return <>
         <View style={{ flex: 1, marginHorizontal: 30, alignItems: 'center' }}>
             <View >
-                {/* <Product width={'100%'} height={390} /> */}
-                {product[0]?.img}
+                <View style={{ height: 392 }}>
+                    {product[0]?.img}
+                </View>
                 <View style={{ position: 'absolute', flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginTop: 52 }}>
                     <TouchableOpacity onPress={() => router.replace('/products')}><ImgBack /></TouchableOpacity>
                     <Share />
