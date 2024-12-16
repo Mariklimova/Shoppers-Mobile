@@ -27,7 +27,7 @@ export default function Detail() {
 
             products.push({ ...product[0], img: '' })
             await AsyncStorage.setItem('prod', JSON.stringify(products))
-            console.log('success')
+            // console.log('success')
             router.replace('/(tabs)/cart')
         } catch (error: any) {
             console.error(error.message)

@@ -3,6 +3,7 @@ import Product from '@/assets/images/Product'
 import Product2 from '@/assets/images/SmartWatch'
 import Product3 from '@/assets/images/AdidasShoe'
 
+
 const obj:iProduct[] = [{
     id: 1,
     title: 'Adidas Shoe',

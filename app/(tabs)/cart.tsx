@@ -7,29 +7,44 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Del from '@/assets/images/delete'
 import storage from '../../storage/index'
 
-function Products() {
+export default function Products() {
 	const [basket, setBasket] = useState<iProduct[]>([]);
 
 	const loadBasket = async () => {
 		const exitingProducts = await AsyncStorage.getItem('prod')
 		const parsed = exitingProducts && JSON.parse(exitingProducts) || []
-		// setBasket(parsed)
-		const result = [];
-		for (let i = 0; i < storage.length; i++) {
-			for (let a = 0; a < parsed.length; a++) {
-				if (storage[i].id == parsed[a].id) {
-					result.push(storage[i])
+
+		// const result = [];
+		// for (let i = 0; i < storage.length; i++) {
+		// 	for (let a = 0; a < parsed.length; a++) {
+		// 		if (storage[i].id == parsed[a].id) {
+		// 			result.push(storage[i])
+		// 		}
+		// 	}
+		// }
+		// setBasket(result)
+
+		const result: iProduct[] = [];
+
+		parsed.forEach((parsedItem: iProduct) => {
+			const existingProduct = result.find((item) => item.id === parsedItem.id);
+			if (existingProduct) {
+				existingProduct.Qty += parsedItem.Qty;
+			} else {
+				const productToAdd = storage.find(item => item.id === parsedItem.id);
+				if (productToAdd) {
+					result.push({ ...productToAdd, Qty: parsedItem.Qty });
 				}
 			}
+		});
 
-		}
-		setBasket(result)
+		setBasket(result);
 	}
 
 	const removeFromBasket = async (index: number) => {
 		const updatedBasket = basket.filter((_, i) => i !== index);
 		setBasket(updatedBasket);
-		
+
 		// Проверка на циклические ссылки
 		try {
 			await AsyncStorage.setItem('prod', JSON.stringify(updatedBasket));
@@ -52,8 +67,7 @@ function Products() {
 				<View style={{ gap: 40, flexWrap: 'wrap', justifyContent: 'center', width: '90%', marginLeft: '5%' }}>
 					{basket.map((el: iProduct, index) => (
 						<View key={index} style={styles.item}>
-							{/* <Product /> */}
-							<View style={{ width: 136, height: 117 }}>
+							<View style={{ width: 136, height: 117, borderRadius: 25, overflow: 'hidden' }}>
 								{el?.img}
 							</View>
 							<View style={{ gap: 13 }}>
@@ -101,14 +115,13 @@ const styles = StyleSheet.create({
 		marginBottom: 50
 	},
 	titleSing: {
-		fontFamily: 'Inter',
+		fontFamily: 'InterBold',
 		fontSize: 14,
-		fontWeight: 700,
 		color: '#000000',
 	},
 	item: {
 		flexDirection: 'row',
-		justifyContent: 'center',
+		justifyContent:'space-around',
 		gap: 40,
 		alignItems: 'center',
 		borderRadius: 30,
@@ -122,15 +135,13 @@ const styles = StyleSheet.create({
 		elevation: 4,
 	},
 	text: {
-		fontFamily: 'Inter',
+		fontFamily: 'InterSemiBold',
 		fontSize: 12,
-		fontWeight: 600,
 		color: 'black',
 	},
 	textSmall: {
-		fontFamily: 'Inter',
+		fontFamily: 'InterSemiBold',
 		fontSize: 12,
-		fontWeight: 600,
 		color: '#827D7D',
 	},
 	vector: {
@@ -142,12 +153,9 @@ const styles = StyleSheet.create({
 		borderColor: '#C6C4C4',
 	},
 	textTotal: {
-		fontFamily: 'Inter',
+		fontFamily: 'InterBold',
 		fontSize: 16,
-		fontWeight: 700,
 		color: 'black',
 	},
 })
-
-export default Products
 
