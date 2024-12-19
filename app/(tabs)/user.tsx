@@ -1,20 +1,30 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Header from '@/components/header'
+import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function user() {
 
-const router = useRouter()
-const params = useLocalSearchParams();
-const username = params.name || 'user';
+    const router = useRouter()
+    const params = useLocalSearchParams();
+    // const username = params.name || 'user';
+    const [username, setUsername] = useState(params.name || 'user');
+   
+    const handleSignOut = () => {
+        setUsername('user');
+        router.replace('/');
+    };
 
     return <>
         <View style={{ alignItems: 'center', gap: 86, backgroundColor: 'white', flex: 1 }}>
-        <Header />
+            <Header />
             <Text style={{ fontFamily: 'InterBold', fontSize: 32, marginTop: 214 }}>Hello {username}</Text>
-          
-           <TouchableOpacity style={styles.btn} onPress={() => router.replace('/')}> <Text style={styles.titleSign}>SIGN OUT</Text></TouchableOpacity >
-              
+
+            <TouchableOpacity style={styles.btn} onPress={handleSignOut}>
+                <Text style={styles.titleSign}>SIGN OUT</Text>
+            </TouchableOpacity >
+
         </View>
 
     </>

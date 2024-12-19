@@ -45,9 +45,12 @@ export default function Products() {
 		const updatedBasket = basket.filter((_, i) => i !== index);
 		setBasket(updatedBasket);
 
+		// Сохраняем только необходимые поля, чтобы избежать циклических ссылок
+		const simplifiedBasket = updatedBasket.map(({ id, Qty, title, price }) => ({ id, Qty, title, price }));
+
 		// Проверка на циклические ссылки
 		try {
-			await AsyncStorage.setItem('prod', JSON.stringify(updatedBasket));
+			await AsyncStorage.setItem('prod', JSON.stringify(simplifiedBasket));
 		} catch (error) {
 			console.error("Ошибка при сохранении в AsyncStorage:", error);
 		}
@@ -67,7 +70,7 @@ export default function Products() {
 				<View style={{ gap: 40, flexWrap: 'wrap', justifyContent: 'center', width: '90%', marginLeft: '5%' }}>
 					{basket.map((el: iProduct, index) => (
 						<View key={index} style={styles.item}>
-							<View style={{ width: 136, height: 117, borderRadius: 25, overflow: 'hidden' }}>
+							<View style={{ width: 136, height: 113, borderRadius: 25, overflow: 'hidden' }}>
 								{el?.img}
 							</View>
 							<View style={{ gap: 13 }}>
@@ -75,7 +78,7 @@ export default function Products() {
 								<Text style={styles.textSmall}>Qty:{el?.Qty}</Text>
 								<Text style={styles.text}>Rs. {el?.price}</Text>
 							</View>
-							<TouchableOpacity onPress={() => removeFromBasket(index)}>
+							<TouchableOpacity style={{ marginRight: 15 }} onPress={() => removeFromBasket(index)}>
 								<Del />
 							</TouchableOpacity>
 						</View>
@@ -121,7 +124,7 @@ const styles = StyleSheet.create({
 	},
 	item: {
 		flexDirection: 'row',
-		justifyContent:'space-around',
+		justifyContent: 'space-between',
 		gap: 40,
 		alignItems: 'center',
 		borderRadius: 30,

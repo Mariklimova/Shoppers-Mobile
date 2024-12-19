@@ -17,7 +17,8 @@ export default function Login() {
             // axios
 
             // router.push('/user');
-            router.push(`/user?name=${encodeURIComponent(user.username)}`);
+            // router.push(`/user?name=${encodeURIComponent(user.username)}`);
+            router.push(`/user?name=${(user.username)}`);
 
         } catch (err: any) {
             console.error(err.message)
