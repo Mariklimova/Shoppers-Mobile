@@ -8,7 +8,6 @@ export default function user() {
 
     const router = useRouter()
     const params = useLocalSearchParams();
-    // const username = params.name || 'user';
     const [username, setUsername] = useState(params.name || 'user');
    
     const handleSignOut = () => {

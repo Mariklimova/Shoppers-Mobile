@@ -16,8 +16,6 @@ export default function Login() {
             if (user.password.length < 8) throw new Error('пароль не менее 8 символов')
             // axios
 
-            // router.push('/user');
-            // router.push(`/user?name=${encodeURIComponent(user.username)}`);
             router.push(`/user?name=${(user.username)}`);
 
         } catch (err: any) {

@@ -14,16 +14,6 @@ export default function Products() {
 		const exitingProducts = await AsyncStorage.getItem('prod')
 		const parsed = exitingProducts && JSON.parse(exitingProducts) || []
 
-		// const result = [];
-		// for (let i = 0; i < storage.length; i++) {
-		// 	for (let a = 0; a < parsed.length; a++) {
-		// 		if (storage[i].id == parsed[a].id) {
-		// 			result.push(storage[i])
-		// 		}
-		// 	}
-		// }
-		// setBasket(result)
-
 		const result: iProduct[] = [];
 
 		parsed.forEach((parsedItem: iProduct) => {
@@ -92,7 +82,7 @@ export default function Products() {
 					>
 						<Text style={styles.textTotal}>Total :</Text>
 						<Text style={styles.textSmall}>Qty. {basket.reduce((sum, el: any) => sum + el.Qty, 0)}</Text>
-						<Text style={styles.textTotal}>Rs. {basket.reduce((sum, el: any) => sum + el.price, 0)}</Text>
+						<Text style={styles.textTotal}>Rs. {basket.reduce((sum, el: any) => sum + el.price*el.Qty, 0)}</Text>
 					</View>
 				</View>
 

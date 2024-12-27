@@ -1,7 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Share from "@/assets/images/share";
 import ImgBack from "@/assets/images/ImgBack";
-import Product from "@/assets/images/ProdItem";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import storage from '../../storage/index';
