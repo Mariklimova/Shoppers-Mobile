@@ -1,4 +1,3 @@
-import Product from '@/assets/images/Product'
 import Header from '@/components/header'
 import React, { useEffect, useState } from 'react'
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -29,6 +28,17 @@ export default function Products() {
 		});
 
 		setBasket(result);
+	}
+
+	const updateQuantity = (change: number, productId: number) => {
+		const updatedBasket = basket.map(item => {
+			if (item.id === productId) {
+				const newQty = item.Qty + change;
+				return { ...item, Qty: newQty < 0 ? 0 : newQty }; // Не допускаем отрицательное количество
+			}
+			return item;
+		});
+		setBasket(updatedBasket);
 	}
 
 	const removeFromBasket = async (index: number) => {
@@ -65,7 +75,13 @@ export default function Products() {
 							</View>
 							<View style={{ gap: 13 }}>
 								<Text style={styles.text}>{el?.title}</Text>
-								<Text style={styles.textSmall}>Qty:{el?.Qty}</Text>
+
+								<View style={{ flexDirection: 'row', gap: 10, alignItems: 'center', justifyContent: 'center' }}>
+									<TouchableOpacity style={styles.btnSmall} onPress={() => updateQuantity(-1, el.id)}><Text>-</Text></TouchableOpacity>
+									<Text style={styles.textSmall}>Qty:{el?.Qty}</Text>
+									<TouchableOpacity style={styles.btnSmall} onPress={() => updateQuantity(1, el.id)}><Text>+</Text></TouchableOpacity>
+								</View>
+
 								<Text style={styles.text}>Rs. {el?.price}</Text>
 							</View>
 							<TouchableOpacity style={{ marginRight: 15 }} onPress={() => removeFromBasket(index)}>
@@ -77,12 +93,10 @@ export default function Products() {
 
 				<View style={{ gap: 29, marginVertical: 62, width: '90%', marginLeft: '5%' }}>
 					<View style={styles.vector} />
-					<View
-						style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-					>
+					<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 						<Text style={styles.textTotal}>Total :</Text>
 						<Text style={styles.textSmall}>Qty. {basket.reduce((sum, el: any) => sum + el.Qty, 0)}</Text>
-						<Text style={styles.textTotal}>Rs. {basket.reduce((sum, el: any) => sum + el.price*el.Qty, 0)}</Text>
+						<Text style={styles.textTotal}>Rs. {basket.reduce((sum, el: any) => sum + el.price * el.Qty, 0)}</Text>
 					</View>
 				</View>
 
@@ -136,6 +150,13 @@ const styles = StyleSheet.create({
 		fontFamily: 'InterSemiBold',
 		fontSize: 12,
 		color: '#827D7D',
+	},
+	btnSmall: {
+		width: 20,
+		height: 20,
+		borderRadius: 5,
+		backgroundColor: '#827d7d9e',
+		alignItems: 'center'
 	},
 	vector: {
 		width: '100%',
